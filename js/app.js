@@ -43,19 +43,31 @@ Player.prototype.handleInput = function(key) {
 
 Player.prototype.update = function(dt) {
   let movement = this.speed * dt;
-  console.log("Movememnt ", this.speed, dt);
+
   switch (this.direction) {
     case "left":
-      this.x -= movement;
+      if (this.x - movement >= 0) {
+        this.x -= movement;
+      } else {
+        return;
+      }
       break;
     case "right":
-      this.x += movement;
+      if (this.x + movement <= 410) {
+        this.x += movement;
+      } else {
+        return;
+      }
       break;
     case "up":
       this.y -= movement;
       break;
     case "down":
-      this.y += movement;
+      if (this.y + movement <= 440) {
+        this.y += movement;
+      } else {
+        return;
+      }
       break;
     default:
       return;
