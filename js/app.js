@@ -2,7 +2,7 @@
 let Enemy = function() {
   this.x = 0;
   this.y = getRandomIntInclusive(50, 250);
-  this.speed = getRandomIntInclusive(40, 60);
+  this.speed = getRandomIntInclusive(10, 20);
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
