@@ -96,6 +96,8 @@ var Engine = (function(global) {
     player.update(dt);
   }
 
+  let collided = false;
+
   /* This function calculates the distance between the centers of the Enemy and
     * the Player.
     * Then is checks if the difference is lower than 2 x radius. In this case
@@ -103,16 +105,28 @@ var Engine = (function(global) {
   */
   function checkCollisions() {
     let distanceBetweenEnemyAndPlayer;
+
     allEnemies.forEach(enemy => {
       distanceBetweenEnemyAndPlayer = Math.sqrt(
         Math.pow(enemy.y - player.y, 2) + Math.pow(enemy.x - player.x, 2)
       );
-      if (distanceBetweenEnemyAndPlayer <= 80) {
-        // alert("Lost");
+
+      if (distanceBetweenEnemyAndPlayer <= 80 && !collided) {
+        collided = true;
+
+        swal({
+          text: "You lost",
+          type: "warning",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Reset Game!"
+        }).then(result => {
+          if (result.value) {
+            reset();
+            collided = false;
+          }
+        });
       }
     });
-
-    //50
   }
 
   /* This function initially draws the "game level", it will then call
@@ -181,7 +195,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
   function reset() {
-    // noop
+    player.reset();
   }
 
   /* Go ahead and load all of the images we know we're going to need to

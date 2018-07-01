@@ -80,6 +80,13 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.reset = function() {
+  this.x = 200;
+  this.y = 440;
+
+  this.direction = null;
+};
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
