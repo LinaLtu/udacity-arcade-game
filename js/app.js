@@ -1,8 +1,8 @@
 // Enemies our player must avoid
-var Enemy = function() {
+let Enemy = function() {
   this.x = 0;
   this.y = getRandomIntInclusive(50, 250);
-  this.speed = getRandomIntInclusive(5, 20);
+  this.speed = getRandomIntInclusive(40, 60);
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -26,6 +26,48 @@ Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Player
+let Player = function() {
+  this.x = 200;
+  this.y = 440;
+
+  this.direction = null;
+
+  this.speed = 400;
+  this.sprite = "images/char-boy.png";
+};
+
+Player.prototype.handleInput = function(key) {
+  this.direction = key;
+};
+
+Player.prototype.update = function(dt) {
+  let movement = this.speed * dt;
+  console.log("Movememnt ", this.speed, dt);
+  switch (this.direction) {
+    case "left":
+      this.x -= movement;
+      break;
+    case "right":
+      this.x += movement;
+      break;
+    case "up":
+      this.y -= movement;
+      break;
+    case "down":
+      this.y += movement;
+      break;
+    default:
+      return;
+  }
+  this.direction = null;
+};
+
+// Draw the player on the screen, required method for game
+Player.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -36,14 +78,11 @@ function getRandomIntInclusive(min, max) {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-let player = {
-  update: () => {},
-  render: () => {}
-};
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+let player = new Player();
 
 let enemyOne = new Enemy();
 
