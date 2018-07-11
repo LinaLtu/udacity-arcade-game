@@ -77,9 +77,28 @@ var Engine = (function(global) {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
+  let won = false;
+  let collided = false;
+
   function update(dt) {
     updateEntities(dt);
     checkCollisions();
+
+    // If player reaches water, they win the game
+    if (player.y < 30 && !won && !collided) {
+      won = true;
+      swal({
+        text: "Congrats! You won!",
+        type: "success",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Play Again!"
+      }).then(result => {
+        if (result.value) {
+          reset();
+          won = false;
+        }
+      });
+    }
   }
 
   /* This is called by the update function and loops through all of the
@@ -96,8 +115,6 @@ var Engine = (function(global) {
     player.update(dt);
   }
 
-  let collided = false;
-
   /* This function calculates the distance between the centers of the Enemy and
     * the Player.
     * Then is checks if the difference is lower than 2 x radius. In this case
@@ -111,7 +128,7 @@ var Engine = (function(global) {
         Math.pow(enemy.y - player.y, 2) + Math.pow(enemy.x - player.x, 2)
       );
 
-      if (distanceBetweenEnemyAndPlayer <= 80 && !collided) {
+      if (distanceBetweenEnemyAndPlayer <= 80 && !collided && !won) {
         collided = true;
 
         swal({
