@@ -2,7 +2,7 @@
 let Enemy = function() {
   this.x = 0;
   this.y = getRandomIntInclusive(50, 250);
-  this.speed = getRandomIntInclusive(10, 20);
+  this.speed = getRandomIntInclusive(20, 80);
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -11,11 +11,22 @@ let Enemy = function() {
   this.sprite = "images/enemy-bug.png";
 };
 
+Enemy.prototype.reset = function() {
+  this.x = 0;
+};
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
   let movement = this.speed * dt;
   this.x += movement;
+
+  // If the bug reaches the end of the field, it comes back to the beginning
+  // and starts walking again
+  if (this.x > 500) {
+    this.x = -100;
+    this.y = getRandomIntInclusive(50, 250);
+  }
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
@@ -33,7 +44,7 @@ let Player = function() {
 
   this.direction = null;
 
-  this.speed = 400;
+  this.speed = 600;
   this.sprite = "images/char-boy.png";
 };
 
@@ -103,9 +114,13 @@ function getRandomIntInclusive(min, max) {
 
 let player = new Player();
 
-let enemyOne = new Enemy();
+//Create bugs
+const enemiesNumber = 3;
+let allEnemies = [];
 
-let allEnemies = [enemyOne];
+for (let i = 0; i < enemiesNumber; i++) {
+  allEnemies.push(new Enemy());
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
