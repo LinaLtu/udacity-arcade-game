@@ -45,7 +45,7 @@ let Player = function() {
   this.direction = null;
 
   this.speed = 600;
-  this.sprite = "images/char-boy.png";
+  this.sprite = "images/char-pink-girl.png";
 };
 
 Player.prototype.handleInput = function(key) {

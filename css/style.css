@@ -1,3 +1,34 @@
 body {
-    text-align: center;
+  text-align: center;
+}
+
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  height: auto;
+  border: 1px solid black;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.modal-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(33% - 2px);
+  height: 50%;
+  /* border: 1px solid black; */
+}
+
+.modal-element img {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-header {
+  width: 100%;
 }
