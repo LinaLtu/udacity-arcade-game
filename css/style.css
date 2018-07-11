@@ -7,9 +7,16 @@ body {
   flex-wrap: wrap;
   width: 400px;
   height: auto;
-  border: 1px solid black;
+  border: 1px solid grey;
+  border-radius: 7px;
   text-align: center;
   margin: 0 auto;
+  margin-top: 8%;
+  background: rgb(211, 111, 65);
+  color: rgb(129, 41, 16);
+  -webkit-box-shadow: 10px 13px 25px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 13px 25px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 13px 25px -5px rgba(0, 0, 0, 0.75);
 }
 
 .modal-element {
