@@ -1,3 +1,5 @@
+"use strict";
+
 // Enemies our player must avoid
 let Enemy = function() {
   this.x = 0;
@@ -71,7 +73,11 @@ Player.prototype.update = function(dt) {
       }
       break;
     case "up":
-      this.y -= movement;
+      if (this.y - movement >= 0) {
+        this.y -= movement;
+      } else {
+        return;
+      }
       break;
     case "down":
       if (this.y + movement <= 440) {
