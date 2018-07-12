@@ -1,7 +1,7 @@
 "use strict";
 
 // Enemies our player must avoid
-let Enemy = function() {
+const Enemy = function() {
   this.x = 0;
   this.y = getRandomIntInclusive(50, 250);
   this.speed = getRandomIntInclusive(20, 80);
@@ -40,7 +40,7 @@ Enemy.prototype.render = function() {
 };
 
 // Player
-let Player = function() {
+const Player = function() {
   this.x = 200;
   this.y = 440;
 
@@ -90,6 +90,22 @@ Player.prototype.update = function(dt) {
       return;
   }
   this.direction = null;
+};
+
+/* This function allows the user to select a player and
+ * starts the game
+ */
+Player.prototype.selectPlayer = function(cb) {
+  let modalImagesHTMLCollection = document.getElementsByTagName("img");
+  let modal = document.getElementsByClassName("modal")[0];
+  let modalImagesArray = Array.prototype.slice.call(modalImagesHTMLCollection);
+  modalImagesArray.forEach(modalImage => {
+    modalImage.addEventListener("click", e => {
+      player.sprite = e.target.getAttribute("src");
+      modal.classList.add("hidden");
+      cb();
+    });
+  });
 };
 
 // Draw the player on the screen, required method for game

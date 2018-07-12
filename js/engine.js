@@ -60,24 +60,6 @@ var Engine = (function(global) {
     win.requestAnimationFrame(main);
   }
 
-  /* This function allows the user to select a player and
-   * starts the game
-   */
-  function selectPlayer(cb) {
-    let modalImagesHTMLCollection = document.getElementsByTagName("img");
-    let modal = document.getElementsByClassName("modal")[0];
-    let modalImagesArray = Array.prototype.slice.call(
-      modalImagesHTMLCollection
-    );
-    modalImagesArray.forEach(modalImage => {
-      modalImage.addEventListener("click", e => {
-        player.sprite = e.target.getAttribute("src");
-        modal.classList.add("hidden");
-        cb();
-      });
-    });
-  }
-
   /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
@@ -85,7 +67,7 @@ var Engine = (function(global) {
   function init() {
     reset();
     lastTime = Date.now();
-    selectPlayer(main);
+    player.selectPlayer(main);
   }
 
   /* This function is called by main (our game loop) and itself calls all
