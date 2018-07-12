@@ -15,7 +15,5 @@
     "url": "https://github.com/LinaLtu/udacity-arcade-game/issues"
   },
   "homepage": "https://github.com/LinaLtu/udacity-arcade-game#readme",
-  "dependencies": {
-    "sweetalert2": "^7.24.4"
-  }
+  "dependencies": {}
 }
